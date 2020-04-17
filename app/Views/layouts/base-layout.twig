@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fullstack Process Faiz Fadly</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+    
+    {% include 'layouts/navigation.twig' %}
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+    {% block javascripts %}
+       <script src="https://code.jquery.com/jquery-3.1.1.min.js"> </script>
+        <script>  
+            // POST
+            $('#formloan').submit(function (e) {
+                $('.help-block').html("");
+                $('.form-control').removeClass('is-invalid');
+                e.preventDefault(); 
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: "POST",
+                    data: $(this).serialize(),
+                    success: function (data) {
+                        if(data.status) {
+                            alert(data.message);
+                            $("#formloan").trigger("reset");
+                        }else{
+                            for (var i = 0; i < data.inputerror.length; i++) {
+                                $('[name="'+data.inputerror[i]+'"]').addClass('is-invalid'); 
+                                $('[name="'+data.inputerror[i]+'"]').next().html(data.error_string[i]);
+                            }
+                        }
+                        $("html, body").animate({ scrollTop: 0 }, "slow");
+                    },
+                    error: function () {
+                        alert('ajax call finished successfully');
+                    }
+                });
+            });
+        </script>
+    {% endblock %}
+</body>
+</html>

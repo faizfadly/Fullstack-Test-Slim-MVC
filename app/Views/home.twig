@@ -1,0 +1,68 @@
+{% extends 'layouts/base-layout.twig' %}
+
+{% block content %}
+   <div style="margin-bottom:20px; margin-top:10px;">
+   <div class="text-center"><h3>Loan Form</h3></div>
+   <form method="POST" action="/public/register" name="formloan" id="formloan">
+    <div class="form-group">
+        <label for="first_name">First Name</label>
+        <input type="text" class="form-control" id="first_name" name="first_name" required="required" placeholder="First Name">
+        <span class="help-block"></span>
+    </div>
+    <div class="form-group">
+        <label for="last_name">Last Name</label>
+        <input type="text" class="form-control" id="last_name" name="last_name" required="required" placeholder="Last Name">
+        <span class="help-block"></span>
+    </div>
+    <div class="form-group">
+        <label for="ktp">KTP</label>
+        <input type="number" class="form-control" id="ktp" name="ktp" required="required" min="16" placeholder="Kartu Tanda Penduduk">
+        <span class="help-block"></span>
+    </div>
+    <div class="form-group">
+        <label for="loan_amount">Loan Amount</label>
+        <input type="number" class="form-control" id="loan_amount" name="loan_amount" required="required" min="1000" max="10000" placeholder="Loan Amount">
+        <span class="help-block"></span>
+    </div>
+    <div class="form-group">
+        <label for="loan_periode">Loan Periode</label>
+        <input type="number" class="form-control" id="loan_periode" name="loan_periode" required="required" min="1" max="12" placeholder="Loan Periode ext 1,3 or 3, etc">
+        <span class="help-block"></span>
+    </div>
+    <div class="form-group">
+        <label for="loan_periode">Loan Purpose</label>
+        <select class="form-control" name="loan_purpose" id="loan_purpose" required="required">
+            <option value="">Choose one of Purpose</option>
+            {% for product in purposes %}
+                <option value="{{ product.name }}">
+                    {{ product.name }}
+                </option>
+            {% endfor %}
+        </select>
+        <span class="help-block"></span>
+    </div>
+    <div class="form-group">
+        <label for="loan_periode">Date Of Birth</label>
+        <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" required="required" placeholder="Loan Periode ext 1,3 or 3, etc">
+        <span class="help-block"></span>
+    </div>
+    <div class="form-group">
+        <label>Sex</label>
+        <div class="form-check">
+        <input class="form-check-input" type="radio" name="sex" id="men" value="Men" checked>
+        <label class="form-check-label" for="men">
+            Men
+        </label>
+        </div>
+        <div class="form-check">
+        <input class="form-check-input" type="radio" name="sex" id="woman" value="Woman">
+        <label class="form-check-label" for="woman">
+            Women
+        </label>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-secondary" id="btnRegister">Submit</button>
+    </form>
+    </div>
+    
+{% endblock %}
