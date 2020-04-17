@@ -1,6 +1,5 @@
 # Fullstack-Test-Slim-MVC
 
-## RUN
 To run this project:
 
 ```
